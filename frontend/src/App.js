@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
 import InputForm from './components/InputForm';
 import CountryInfo from './components/CountryInfo';
 import axios from 'axios';
-import './App.css';
-
 
 function App() {
+  const [country, setCountry] = useState('');
   const [countryData, setCountryData] = useState(null);
 
-  const searchCountry = async (country) => {
+  const searchCountry = async (countryName) => {
     try {
-      const response = await axios.get(`http://localhost:3001/countries/${country}`);
+      const response = await axios.get(`http://localhost:3001/countries/${countryName}`);
       console.log('Response:', response.data);
       setCountryData(response.data);
     } catch (error) {
@@ -18,13 +17,20 @@ function App() {
     }
   };
 
+  const handleInputChange = (event) => {
+    setCountry(event.target.value);
+  };
+
   return (
     <div>
-      <InputForm onSearch={searchCountry}/>
+      <InputForm
+        onSearch={searchCountry}
+        value={country}
+        onChange={handleInputChange}
+      />
       {countryData && <CountryInfo countryData={countryData} />}
     </div>
   );
 }
 
 export default App;
-
