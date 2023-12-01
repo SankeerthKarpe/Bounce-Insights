@@ -8,9 +8,9 @@ import './App.css';
 function App() {
   const [countryData, setCountryData] = useState(null);
 
-  const searchCountry = async (commonName) => {
+  const searchCountry = async (country) => {
     try {
-      const response = await axios.get(`http://localhost:3001/countries/${commonName}`);
+      const response = await axios.get(`http://localhost:3001/countries/${country}`);
       console.log('Response:', response.data);
       setCountryData(response.data);
     } catch (error) {

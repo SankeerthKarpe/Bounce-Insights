@@ -8,11 +8,11 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/countries/:name', async (req, res) => {
-  const commonName = req.params.name;
-  console.log('Country Name:', commonName);
+  const country = req.params.name;
+  console.log('Country Name:', country);
   
   try {
-    const response = await axios.get(`https://restcountries.com/v3.1/name/${commonName}`);
+    const response = await axios.get(`https://restcountries.com/v3.1/name/${country}`);
     const countryData = response.data[0]; 
     res.json(countryData);
   } catch (error) {
